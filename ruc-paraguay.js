@@ -1,4 +1,17 @@
+//this.variable es la variable que hace referencia al input
+let cuerpo = this.variable.replace(/[^\w]/g, "").slice(0, -1);
+
+//Se llama a la función para obtener el dígito verificador
+let dv = this.validation_ruc_paraguay(cuerpo)
+
+//se valida si el digito verificador es igual al ingresado en el input por el usuario
+this.validRut = (dv ==  this.destino.rutUser.slice(-1))? false: true;
+
+//************************************************************************************************
+
+//Recibiendo el parámetro desde el input
 validation_ruc_paraguay(p_numero, p_basemax = 11){
+    //Eliminando cualquier caracter ingresado por el usuario
     p_numero = p_numero.replace(/[^\w]/g, '');
     let v_numero_aux;
     let v_numero_al = "";
