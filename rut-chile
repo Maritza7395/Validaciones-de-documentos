@@ -1,0 +1,58 @@
+validation_rut(dato) {
+    const regex = /[^\w]/g;
+    if (dato == "") {
+      this.validNDoc = false;
+    } else {
+      if (this.user.tipoDoc == '1') {
+        dato = dato.replace(regex, '');
+        let cuerpo = dato.slice(0, -1);
+        let resultadoDv = this.calculaDV(cuerpo);
+        let dv = dato.slice(-1).toUpperCase();
+        cuerpo = cuerpo.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+        this.user.rutUser = cuerpo + '-' + dv;
+        if (resultadoDv != dv) {
+          this.validRut = true;
+          this.validNDoc = false;
+        }
+        else {
+          this.validRut = false;
+          this.validNDoc = true;
+        }
+      }
+      else {
+        dato = dato.replace(regex, '');
+        this.user.rutUser = dato;
+      }
+    }
+  }
+
+  /**
+   * @author
+   */
+  calculaDV(rut) {
+    let rutAsString = '' + rut;
+    let numeros = rutAsString.split("");
+    numeros.reverse();
+    let serie = 2;
+    let resultados = [];
+    for (let i = 0; i < numeros.length; i++) {
+      let numero;
+      numero = numeros[i];
+      let resultadoMultiplicacion = numero * serie;
+      resultados.push(resultadoMultiplicacion);
+      serie++;
+      if (serie > 7) {
+        serie = 2;
+      }
+    }
+    let sumaResultados = resultados.reduce(function (a, b) { return a + b; });
+    let resto = sumaResultados % 11;
+    let dv;
+    dv = 11 - resto;
+    if (dv === 10) {
+      dv = 'K'
+    } else if (dv === 11) {
+      dv = 0;
+    }
+    return dv;
+  }
