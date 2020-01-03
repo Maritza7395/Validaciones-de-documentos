@@ -24,9 +24,6 @@ validation_rut(dato) {
     }
   }
 
-  /**
-   * @author
-   */
   calculaDV(rut) {
     let rutAsString = '' + rut;
     let numeros = rutAsString.split("");
