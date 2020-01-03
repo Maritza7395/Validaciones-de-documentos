@@ -96,11 +96,12 @@ validation_CNPJ_CPF(cnpj) {
       return false;
     }
   } 
+
+
     //CNPJs y CPFs de pruebas
     //******CNPJs Validos********
     //    29.083.780/4721-70
     //    16823872289165
-
     //******CPFs Validos*********
     //    85535084557
     //    784.047.332-60
