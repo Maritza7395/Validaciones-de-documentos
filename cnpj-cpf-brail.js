@@ -1,5 +1,8 @@
+//Recibiendo el parámetro "cnpj" desde un input
 validation_CNPJ_CPF(cnpj) {
+    //Elimina cualquier caracter puesto en un input
     cnpj = cnpj.replace(/[^\w]/g, "");
+    //Si el largo de la variable es 14 es un CNPJ
     if (cnpj.length == 14) {
       // Elimina CNPJs invalidos conocidos
       if (cnpj == "00000000000000" ||
@@ -43,8 +46,10 @@ validation_CNPJ_CPF(cnpj) {
       if (resultado != digitos.charAt(1)){
         return false;
       }
-      this.destino.rutUser = cnpj.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/g,"\$1.\$2.\$3\/\$4\-\$5")
+    //Se le da formato del CNPJ al input XX.XXX.XXX/YYYY-ZZ
+      this.variable = cnpj.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/g,"\$1.\$2.\$3\/\$4\-\$5")
       return true;
+    //si el largo de la variable es 11 es un CPF
     } else if (cnpj.length == 11) {
       let Suma;
       let Resto;
@@ -83,8 +88,10 @@ validation_CNPJ_CPF(cnpj) {
       if (Resto != parseInt(cnpj.substring(10, 11))){
          return false;
       }
-      this.destino.rutUser = cnpj.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g,"\$1.\$2.\$3\-\$4");
+    //Se le da formato del CPF al input XXX.XXX.XXX-YY
+      this.variable = cnpj.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g,"\$1.\$2.\$3\-\$4");
       return true;
+    //Si el largo no es ni 14 ni 11, el numero ingresado en invalido
     } else{
       return false;
     }
