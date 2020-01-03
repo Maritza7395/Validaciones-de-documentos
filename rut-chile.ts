@@ -1,27 +1,25 @@
+//Recibiendo el parámetro "dato" desde el input
 validation_rut(dato) {
     const regex = /[^\w]/g;
     if (dato == "") {
-      this.validNDoc = false;
+      return false;
     } else {
-      if (this.user.tipoDoc == '1') {
-        dato = dato.replace(regex, '');
-        let cuerpo = dato.slice(0, -1);
-        let resultadoDv = this.calculaDV(cuerpo);
-        let dv = dato.slice(-1).toUpperCase();
-        cuerpo = cuerpo.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
-        this.user.rutUser = cuerpo + '-' + dv;
-        if (resultadoDv != dv) {
-          this.validRut = true;
-          this.validNDoc = false;
-        }
-        else {
-          this.validRut = false;
-          this.validNDoc = true;
-        }
+    //Eliminando caracteres especiales
+      dato = dato.replace(regex, '');
+      let cuerpo = dato.slice(0, -1);
+      //Calculando el digito verificador
+      let resultadoDv = this.calculaDV(cuerpo);
+      let dv = dato.slice(-1).toUpperCase();
+      //Dando el formato XX.XXX.XXX-Y o X.XXX.XXX-Y al input
+      cuerpo = cuerpo.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+      //this.variable hace referencia al input
+      this.variable = cuerpo + '-' + dv;
+      //Verificando si el digito verificador es igual al ingresado
+      if (resultadoDv != dv) {
+        return false;
       }
       else {
-        dato = dato.replace(regex, '');
-        this.user.rutUser = dato;
+        return true;
       }
     }
   }
