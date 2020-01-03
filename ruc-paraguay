@@ -1,0 +1,27 @@
+validation_ruc_paraguay(p_numero, p_basemax = 11){
+    p_numero = p_numero.replace(/[^\w]/g, '');
+    let v_numero_aux;
+    let v_numero_al = "";
+    for (let i = 0; i < p_numero.length; i++) {
+        let c = p_numero.charAt(i);       
+        v_numero_al += c.toString();
+    } 
+    let k = 2;
+    let v_total = 0;
+    for (let i = v_numero_al.length - 1; i >= 0; i --) {
+        if(k > p_basemax){
+          k = 2
+        }
+        v_numero_aux = v_numero_al.charAt(i);
+        v_total += (v_numero_aux * k);
+        k = k + 1;    
+    }
+    let v_digit = 0;
+    let v_resto = v_total % 11;  
+    if(v_resto > 1){
+      v_digit  = 11 - v_resto
+    } else { 
+      v_digit = 0
+    };
+    return v_digit;
+  }
