@@ -1,5 +1,7 @@
   //Recibiendo el parámetro "rfc" desde el input
   validation_rfc_mexico(rfc) {
+    //this.variable hace referencia al input
+    let rfc = this.variable.toUpperCase();
     let regex = /^([ A-ZÑ&]?[A-ZÑ&]{3}) ?(?:- ?)?(\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])) ?(?:- ?)?([A-Z\d]{2})([A\d])$/;
     //Validando si el formato ingresado es valido
     let validado = rfc.match(regex);
